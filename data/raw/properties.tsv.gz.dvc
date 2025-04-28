@@ -1,0 +1,5 @@
+outs:
+- md5: 4030b19ac71dc5c2596210c4a42264be
+  size: 4039469
+  hash: md5
+  path: properties.tsv.gz

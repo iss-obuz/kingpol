@@ -1,0 +1,5 @@
+outs:
+- md5: eb43bf3ffa1fb9c85c0db07dac977d12
+  size: 78043
+  hash: md5
+  path: entities.tsv.gz

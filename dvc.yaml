@@ -1,0 +1,230 @@
+stages:
+
+  prices:
+    cmd: python scripts/make_prices.py
+    deps:
+    - kingpol/dataset/aux.py
+    - kingpol/dataset/proc.py
+    - kingpol/dataset/fields/core.py
+    - kingpol/dataset/models/conversions.py
+    - kingpol/dataset/models/prices.py
+    - kingpol/dataset/models/currencies.py
+    - scripts/make_prices.py
+    - data/aux/prices.xlsx
+    outs:
+    - data/proc/prices.parquet:
+        persist: true
+    - data/proc/currencies.parquet:
+        persist: true
+    - data/proc/conversions.parquet:
+        persist: true
+
+  properties:
+    cmd: python scripts/make_properties.py
+    deps:
+    - kingpol/dataset/raw.py
+    - kingpol/dataset/aux.py
+    - kingpol/dataset/proc.py
+    - kingpol/dataset/fields/companies.py
+    - kingpol/dataset/fields/properties.py
+    - kingpol/dataset/models/properties.py
+    - scripts/make_properties.py
+    - data/raw/companies.tsv.gz
+    - data/raw/properties.tsv.gz
+    - data/aux/properties.xlsx
+    - data/aux/corrections.xlsx
+    - data/aux/prices.xlsx
+    - data/proc/currencies.parquet
+    outs:
+    - data/proc/properties.parquet:
+        persist: true
+
+  records:
+    cmd: python scripts/make_records.py
+    deps:
+    - kingpol/dataset/aux.py
+    - kingpol/dataset/raw.py
+    - kingpol/dataset/proc.py
+    - kingpol/dataset/fields/companies.py
+    - kingpol/dataset/models/records.py
+    - kingpol/outliers.py
+    - scripts/make_records.py
+    - data/raw/companies.tsv.gz
+    - data/aux/properties.xlsx
+    - data/aux/merging.xlsx
+    - data/aux/corrections.xlsx
+    - data/proc/properties.parquet
+    - data/proc/prices.parquet
+    - data/proc/conversions.parquet
+    params:
+    - records
+    outs:
+    - data/proc/records.parquet:
+        persist: true
+    - data/proc/industries.parquet:
+        persist: true
+
+  yearly:
+    cmd: python scripts/make_yearly.py
+    deps:
+    - kingpol/dataset/aux.py
+    - kingpol/dataset/proc.py
+    - kingpol/dataset/fields/companies.py
+    - kingpol/dataset/models/yearly.py
+    - kingpol/outliers.py
+    - scripts/make_yearly.py
+    - data/aux/merging.xlsx
+    - data/aux/properties.xlsx
+    - data/proc/records.parquet
+    params:
+    - yearly
+    outs:
+    - data/proc/yearly.parquet:
+        persist: true
+
+  companies:
+    cmd: python scripts/make_companies.py
+    deps:
+    - kingpol/dataset/proc.py
+    - kingpol/outliers.py
+    - kingpol/stats.py
+    - kingpol/dataset/fields/companies.py
+    - kingpol/dataset/models/companies.py
+    - scripts/make_companies.py
+    - data/proc/yearly.parquet
+    params:
+    - years
+    - companies
+    - elite
+    outs:
+    - data/proc/companies.parquet:
+        persist: true
+
+  entities:
+    cmd: python scripts/make_entities.py
+    deps:
+    - kingpol/dataset/aux.py
+    - kingpol/dataset/raw.py
+    - kingpol/dataset/proc.py
+    - kingpol/dataset/fields/entities.py
+    - kingpol/dataset/models/entities.py
+    - scripts/make_entities.py
+    - data/aux/corrections.xlsx
+    - data/aux/merging.xlsx
+    - data/raw/entities.tsv.gz
+    - data/raw/relations.tsv.gz
+    outs:
+    - data/proc/entities.parquet:
+        persist: true
+
+  relations:
+    cmd: python scripts/make_relations.py
+    deps:
+    - kingpol/dataset/aux.py
+    - kingpol/dataset/raw.py
+    - kingpol/dataset/proc.py
+    - kingpol/dataset/fields/relations.py
+    - kingpol/dataset/models/relations.py
+    - scripts/make_relations.py
+    - data/aux/corrections.xlsx
+    - data/raw/relations.tsv.gz
+    outs:
+    - data/proc/relations.parquet:
+        persist: true
+
+  shares:
+    cmd: python scripts/make_shares.py
+    deps:
+    - kingpol/dataset/proc.py
+    - kingpol/dataset/models/shares.py
+    - scripts/make_shares.py
+    - data/proc/relations.parquet
+    - data/proc/records.parquet
+    - data/proc/yearly.parquet
+    params:
+    - shares
+    outs:
+    - data/proc/shares.parquet:
+        persist: true
+
+  ranking:
+    cmd: python scripts/make_ranking.py
+    deps:
+    - kingpol/dataset/proc.py
+    - kingpol/ranking.py
+    - kingpol/dataset/models/ranking.py
+    - kingpol/dataset/fields/ranking.py
+    - scripts/make_ranking.py
+    - data/proc/companies.parquet
+    - data/proc/shares.parquet
+    - data/proc/entities.parquet
+    params:
+    - ranking
+    - elite
+    outs:
+    - data/proc/ranking.parquet:
+        persist: true
+
+  groups:
+    cmd: python scripts/make_groups.py
+    deps:
+    - kingpol/dataset/proc.py
+    - kingpol/dataset/models/groups.py
+    - scripts/make_groups.py
+    - data/proc/companies.parquet
+    - data/proc/shares.parquet
+    - data/proc/ranking.parquet
+    outs:
+    - data/proc/groups.parquet:
+        persist: true
+
+  excel:
+    cmd: python scripts/make_excel.py
+    deps:
+    - kingpol/dataset/proc.py
+    - kingpol/excel.py
+    - scripts/make_excel.py
+    - data/proc/conversions.parquet
+    - data/proc/prices.parquet
+    - data/proc/industries.parquet
+    - data/proc/records.parquet
+    - data/proc/yearly.parquet
+    - data/proc/companies.parquet
+    - data/proc/entities.parquet
+    - data/proc/relations.parquet
+    - data/proc/shares.parquet
+    - data/proc/ranking.parquet
+    - data/proc/groups.parquet
+    outs:
+    - data/proc/kingpol.xlsx:
+        persist: true
+
+  tables:
+    cmd: python scripts/make_tables.py
+    deps:
+    - kingpol/dataset/proc.py
+    - kingpol/stats.py
+    - kingpol/excel.py
+    - scripts/make_tables.py
+    - data/proc/yearly.parquet
+    params:
+    - tables
+    outs:
+    - data/proc/tables.xlsx:
+        persist: true
+
+  codebook:
+    cmd: python scripts/make_codebook.py
+    deps:
+    - kingpol/dataset/models
+    - kingpol/strings.py
+    - scripts/make_codebook.py
+    - data/proc/kingpol.xlsx
+
+  readme:
+    cmd: python scripts/make_readme.py
+    deps:
+    - kingpol/dataset/models
+    - kingpol/strings.py
+    - scripts/make_readme.py
+    - data/proc/kingpol.xlsx

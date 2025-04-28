@@ -1,0 +1,655 @@
+schema: '2.0'
+stages:
+  prices:
+    cmd: python scripts/make_prices.py
+    deps:
+    - path: data/aux/prices.xlsx
+      hash: md5
+      md5: ed72692acae68ab4a715d737b317df8f
+      size: 34154
+    - path: kingpol/dataset/aux.py
+      hash: md5
+      md5: c6c14329767acf8f0646407774c1594b
+      size: 5758
+    - path: kingpol/dataset/fields/core.py
+      hash: md5
+      md5: c01739152b4fcbea9fc1181650206bcf
+      size: 1032
+    - path: kingpol/dataset/models/conversions.py
+      hash: md5
+      md5: 0e83aa2452917e8c77ad2433e908c54f
+      size: 536
+    - path: kingpol/dataset/models/currencies.py
+      hash: md5
+      md5: 84f457b90e57034276b5deca728198ce
+      size: 549
+    - path: kingpol/dataset/models/prices.py
+      hash: md5
+      md5: d5310629d0395ca589792ca66fc4a8e2
+      size: 491
+    - path: kingpol/dataset/proc.py
+      hash: md5
+      md5: 98feae6010b482b73476b08aca198ee1
+      size: 2847
+    - path: scripts/make_prices.py
+      hash: md5
+      md5: 8e6e34c69344171d255ac5300b233f9a
+      size: 3909
+    outs:
+    - path: data/proc/conversions.parquet
+      hash: md5
+      md5: c45d8bc5a5f684b00f5c69286f30b39a
+      size: 3803
+    - path: data/proc/currencies.parquet
+      hash: md5
+      md5: 6a4e26d0fe239d7757cbb10b6d0030b1
+      size: 2762
+    - path: data/proc/prices.parquet
+      hash: md5
+      md5: d8b25b6e4aa00d37e9dc76466ed75716
+      size: 5047
+  properties:
+    cmd: python scripts/make_properties.py
+    deps:
+    - path: data/aux/corrections.xlsx
+      hash: md5
+      md5: dd923e428e7314c24b419e4a95868a8d
+      size: 38912
+    - path: data/aux/prices.xlsx
+      hash: md5
+      md5: ed72692acae68ab4a715d737b317df8f
+      size: 34154
+    - path: data/aux/properties.xlsx
+      hash: md5
+      md5: 99d75b68d61e71ee359450418018b894
+      size: 51481
+    - path: data/proc/currencies.parquet
+      hash: md5
+      md5: 6a4e26d0fe239d7757cbb10b6d0030b1
+      size: 2762
+    - path: data/raw/companies.tsv.gz
+      hash: md5
+      md5: 16934d114f464e9df6fcac528c817425
+      size: 2088560
+    - path: data/raw/properties.tsv.gz
+      hash: md5
+      md5: 4030b19ac71dc5c2596210c4a42264be
+      size: 4039469
+    - path: kingpol/dataset/aux.py
+      hash: md5
+      md5: c6c14329767acf8f0646407774c1594b
+      size: 5758
+    - path: kingpol/dataset/fields/companies.py
+      hash: md5
+      md5: 5b6d008664b73543f094d9278c96ab4b
+      size: 2907
+    - path: kingpol/dataset/fields/properties.py
+      hash: md5
+      md5: 37996072e0c410ff0e422855d26e4af5
+      size: 1456
+    - path: kingpol/dataset/models/properties.py
+      hash: md5
+      md5: 53202281d2a62be2b68c0682db33892e
+      size: 6506
+    - path: kingpol/dataset/proc.py
+      hash: md5
+      md5: 98feae6010b482b73476b08aca198ee1
+      size: 2847
+    - path: kingpol/dataset/raw.py
+      hash: md5
+      md5: 242047efc4b4e899971f98be30488904
+      size: 1715
+    - path: scripts/make_properties.py
+      hash: md5
+      md5: 9fcf50e4fcf1a1503120e4642eddf03e
+      size: 4008
+    outs:
+    - path: data/proc/properties.parquet
+      hash: md5
+      md5: 89eb4f0b2f548fb6bd20125827662509
+      size: 2452063
+  records:
+    cmd: python scripts/make_records.py
+    deps:
+    - path: data/aux/corrections.xlsx
+      hash: md5
+      md5: dd923e428e7314c24b419e4a95868a8d
+      size: 38912
+    - path: data/aux/merging.xlsx
+      hash: md5
+      md5: 701bd227a57366efdd26c0f750700156
+      size: 9088
+    - path: data/aux/properties.xlsx
+      hash: md5
+      md5: 99d75b68d61e71ee359450418018b894
+      size: 51481
+    - path: data/proc/conversions.parquet
+      hash: md5
+      md5: c45d8bc5a5f684b00f5c69286f30b39a
+      size: 3803
+    - path: data/proc/prices.parquet
+      hash: md5
+      md5: d8b25b6e4aa00d37e9dc76466ed75716
+      size: 5047
+    - path: data/proc/properties.parquet
+      hash: md5
+      md5: 89eb4f0b2f548fb6bd20125827662509
+      size: 2452063
+    - path: data/raw/companies.tsv.gz
+      hash: md5
+      md5: 16934d114f464e9df6fcac528c817425
+      size: 2088560
+    - path: kingpol/dataset/aux.py
+      hash: md5
+      md5: c6c14329767acf8f0646407774c1594b
+      size: 5758
+    - path: kingpol/dataset/fields/companies.py
+      hash: md5
+      md5: 5b6d008664b73543f094d9278c96ab4b
+      size: 2907
+    - path: kingpol/dataset/models/records.py
+      hash: md5
+      md5: e34a9173384ff0878c8b70a3443b5582
+      size: 9741
+    - path: kingpol/dataset/proc.py
+      hash: md5
+      md5: 98feae6010b482b73476b08aca198ee1
+      size: 2847
+    - path: kingpol/dataset/raw.py
+      hash: md5
+      md5: 242047efc4b4e899971f98be30488904
+      size: 1715
+    - path: kingpol/outliers.py
+      hash: md5
+      md5: aeb14650dca2ddf95d0c3fe6e6fa1caa
+      size: 1487
+    - path: scripts/make_records.py
+      hash: md5
+      md5: dfb407a55c46b81a499433698ef444de
+      size: 5364
+    params:
+      params.yaml:
+        records:
+          industries:
+            min_complete: 0.1
+          outliers:
+            threshold: 0.5
+          governorates:
+          - warszawska
+          - piotrkowska
+          - radomska
+          - kaliska
+          - lubelska
+          - kielecka
+          - siedlecka
+          - łomżyńska
+          - płocka
+          - suwalska
+    outs:
+    - path: data/proc/industries.parquet
+      hash: md5
+      md5: c31b3628544fbb5a7f8c04bb5984800a
+      size: 2495
+    - path: data/proc/records.parquet
+      hash: md5
+      md5: 0cdb16e17bc5f09e22a24a65c4a4d8d6
+      size: 768163
+  yearly:
+    cmd: python scripts/make_yearly.py
+    deps:
+    - path: data/aux/merging.xlsx
+      hash: md5
+      md5: 701bd227a57366efdd26c0f750700156
+      size: 9088
+    - path: data/aux/properties.xlsx
+      hash: md5
+      md5: 99d75b68d61e71ee359450418018b894
+      size: 51481
+    - path: data/proc/records.parquet
+      hash: md5
+      md5: 0cdb16e17bc5f09e22a24a65c4a4d8d6
+      size: 768163
+    - path: kingpol/dataset/aux.py
+      hash: md5
+      md5: c6c14329767acf8f0646407774c1594b
+      size: 5758
+    - path: kingpol/dataset/fields/companies.py
+      hash: md5
+      md5: 5b6d008664b73543f094d9278c96ab4b
+      size: 2907
+    - path: kingpol/dataset/models/yearly.py
+      hash: md5
+      md5: 8c3519970286e1700de74501aa280ed4
+      size: 3267
+    - path: kingpol/dataset/proc.py
+      hash: md5
+      md5: 98feae6010b482b73476b08aca198ee1
+      size: 2847
+    - path: kingpol/outliers.py
+      hash: md5
+      md5: aeb14650dca2ddf95d0c3fe6e6fa1caa
+      size: 1487
+    - path: scripts/make_yearly.py
+      hash: md5
+      md5: 46a9dd1aa2c42cc2ff335db411ce60d5
+      size: 4617
+    params:
+      params.yaml:
+        yearly:
+          outliers:
+            threshold: 0.5
+          sectors:
+          - industry
+    outs:
+    - path: data/proc/yearly.parquet
+      hash: md5
+      md5: 443bc2feb227280772b699d1b0995057
+      size: 474029
+  companies:
+    cmd: python scripts/make_companies.py
+    deps:
+    - path: data/proc/yearly.parquet
+      hash: md5
+      md5: 443bc2feb227280772b699d1b0995057
+      size: 474029
+    - path: kingpol/dataset/fields/companies.py
+      hash: md5
+      md5: 5b6d008664b73543f094d9278c96ab4b
+      size: 2907
+    - path: kingpol/dataset/models/companies.py
+      hash: md5
+      md5: aa5b7560c72efe6366ee99b8039f40c2
+      size: 1594
+    - path: kingpol/dataset/proc.py
+      hash: md5
+      md5: 98feae6010b482b73476b08aca198ee1
+      size: 2847
+    - path: kingpol/outliers.py
+      hash: md5
+      md5: aeb14650dca2ddf95d0c3fe6e6fa1caa
+      size: 1487
+    - path: kingpol/stats.py
+      hash: md5
+      md5: f5c4c2edf6d5387a43a0211148c2c400
+      size: 748
+    - path: scripts/make_companies.py
+      hash: md5
+      md5: cbdaa885866582fed36ed1329c0f8b7e
+      size: 2458
+    params:
+      params.yaml:
+        companies:
+          outliers:
+            threshold: 0.5
+        elite:
+          min_value: 1000000
+          min_employment: 500
+        years:
+        - 1904
+        - 1905
+        - 1906
+        - 1907
+        - 1908
+        - 1909
+        - 1910
+        - 1911
+    outs:
+    - path: data/proc/companies.parquet
+      hash: md5
+      md5: 4d8e6f663bebabc1c8358b00060ccc48
+      size: 270611
+  entities:
+    cmd: python scripts/make_entities.py
+    deps:
+    - path: data/aux/corrections.xlsx
+      hash: md5
+      md5: dd923e428e7314c24b419e4a95868a8d
+      size: 38912
+    - path: data/aux/merging.xlsx
+      hash: md5
+      md5: 701bd227a57366efdd26c0f750700156
+      size: 9088
+    - path: data/raw/entities.tsv.gz
+      hash: md5
+      md5: eb43bf3ffa1fb9c85c0db07dac977d12
+      size: 78043
+    - path: data/raw/relations.tsv.gz
+      hash: md5
+      md5: 73e24e405500713b86940047d58368c7
+      size: 2245461
+    - path: kingpol/dataset/aux.py
+      hash: md5
+      md5: c6c14329767acf8f0646407774c1594b
+      size: 5758
+    - path: kingpol/dataset/fields/entities.py
+      hash: md5
+      md5: 01907e2c859d0b0a741b807d0b230c17
+      size: 2534
+    - path: kingpol/dataset/models/entities.py
+      hash: md5
+      md5: 0e3b17181357e814752fb71b094f5afb
+      size: 6474
+    - path: kingpol/dataset/proc.py
+      hash: md5
+      md5: 98feae6010b482b73476b08aca198ee1
+      size: 2847
+    - path: kingpol/dataset/raw.py
+      hash: md5
+      md5: 242047efc4b4e899971f98be30488904
+      size: 1715
+    - path: scripts/make_entities.py
+      hash: md5
+      md5: e06950c7b099432e99d8fd2d97c7260a
+      size: 2090
+    outs:
+    - path: data/proc/entities.parquet
+      hash: md5
+      md5: f9f1758baeae230f1d4112ef4081fc0b
+      size: 418887
+  relations:
+    cmd: python scripts/make_relations.py
+    deps:
+    - path: data/aux/corrections.xlsx
+      hash: md5
+      md5: dd923e428e7314c24b419e4a95868a8d
+      size: 38912
+    - path: data/raw/relations.tsv.gz
+      hash: md5
+      md5: 73e24e405500713b86940047d58368c7
+      size: 2245461
+    - path: kingpol/dataset/aux.py
+      hash: md5
+      md5: c6c14329767acf8f0646407774c1594b
+      size: 5758
+    - path: kingpol/dataset/fields/relations.py
+      hash: md5
+      md5: e1effc0276c40aa4be2d7b3323e996b6
+      size: 212
+    - path: kingpol/dataset/models/relations.py
+      hash: md5
+      md5: e15928cfe00f8a8f17dda7c1ec2e388e
+      size: 1448
+    - path: kingpol/dataset/proc.py
+      hash: md5
+      md5: 98feae6010b482b73476b08aca198ee1
+      size: 2847
+    - path: kingpol/dataset/raw.py
+      hash: md5
+      md5: 242047efc4b4e899971f98be30488904
+      size: 1715
+    - path: scripts/make_relations.py
+      hash: md5
+      md5: 242682b527ad487524ff1c5782db902c
+      size: 1364
+    outs:
+    - path: data/proc/relations.parquet
+      hash: md5
+      md5: 83d92adaeb4724e6835fb7b5f1148e40
+      size: 568468
+  shares:
+    cmd: python scripts/make_shares.py
+    deps:
+    - path: data/proc/records.parquet
+      hash: md5
+      md5: 0cdb16e17bc5f09e22a24a65c4a4d8d6
+      size: 768163
+    - path: data/proc/relations.parquet
+      hash: md5
+      md5: 83d92adaeb4724e6835fb7b5f1148e40
+      size: 568468
+    - path: data/proc/yearly.parquet
+      hash: md5
+      md5: 443bc2feb227280772b699d1b0995057
+      size: 474029
+    - path: kingpol/dataset/models/shares.py
+      hash: md5
+      md5: 55ae5c5802d5394b9aefd338763def6e
+      size: 906
+    - path: kingpol/dataset/proc.py
+      hash: md5
+      md5: 98feae6010b482b73476b08aca198ee1
+      size: 2847
+    - path: scripts/make_shares.py
+      hash: md5
+      md5: c591c1c0756b132b1680ce722a134221
+      size: 2422
+    params:
+      params.yaml:
+        shares:
+          relations:
+          - owner
+          - namesake
+          - president
+    outs:
+    - path: data/proc/shares.parquet
+      hash: md5
+      md5: 9804e47fc9a19fe55bfcd53721eec210
+      size: 139636
+  ranking:
+    cmd: python scripts/make_ranking.py
+    deps:
+    - path: data/proc/companies.parquet
+      hash: md5
+      md5: 4d8e6f663bebabc1c8358b00060ccc48
+      size: 270611
+    - path: data/proc/entities.parquet
+      hash: md5
+      md5: f9f1758baeae230f1d4112ef4081fc0b
+      size: 418887
+    - path: data/proc/shares.parquet
+      hash: md5
+      md5: 9804e47fc9a19fe55bfcd53721eec210
+      size: 139636
+    - path: kingpol/dataset/fields/ranking.py
+      hash: md5
+      md5: c4b93117282346655145104a422f4d74
+      size: 2325
+    - path: kingpol/dataset/models/ranking.py
+      hash: md5
+      md5: 95e5b16612f609fffe54f4a0dc056c8b
+      size: 2469
+    - path: kingpol/dataset/proc.py
+      hash: md5
+      md5: 98feae6010b482b73476b08aca198ee1
+      size: 2847
+    - path: kingpol/ranking.py
+      hash: md5
+      md5: 2d57cab0ff9b90fedea3b9ec1c096fec
+      size: 2055
+    - path: scripts/make_ranking.py
+      hash: md5
+      md5: 05270c2a7e5c271ea389c25ba8a5c17d
+      size: 3285
+    params:
+      params.yaml:
+        elite:
+          min_value: 1000000
+          min_employment: 500
+        ranking:
+          use:
+          - value_share
+          - employment_share
+          - value_total
+          - employment_total
+          sortby:
+          - latent
+          - employment_total
+          latent:
+            mask: 1000
+            alpha: 0.001
+    outs:
+    - path: data/proc/ranking.parquet
+      hash: md5
+      md5: dabfd563adb10a675e05629b46b012a6
+      size: 229780
+  groups:
+    cmd: python scripts/make_groups.py
+    deps:
+    - path: data/proc/companies.parquet
+      hash: md5
+      md5: 4d8e6f663bebabc1c8358b00060ccc48
+      size: 270611
+    - path: data/proc/ranking.parquet
+      hash: md5
+      md5: dabfd563adb10a675e05629b46b012a6
+      size: 229780
+    - path: data/proc/shares.parquet
+      hash: md5
+      md5: 9804e47fc9a19fe55bfcd53721eec210
+      size: 139636
+    - path: kingpol/dataset/models/groups.py
+      hash: md5
+      md5: b70065f4e9dcf32db9099c3250b92694
+      size: 1895
+    - path: kingpol/dataset/proc.py
+      hash: md5
+      md5: 98feae6010b482b73476b08aca198ee1
+      size: 2847
+    - path: scripts/make_groups.py
+      hash: md5
+      md5: ed3707a76dd09bcfafaa5f6b1053b364
+      size: 1147
+    outs:
+    - path: data/proc/groups.parquet
+      hash: md5
+      md5: 0fc7f9cf91d9018fd8ebf14037c87bb7
+      size: 327314
+  excel:
+    cmd: python scripts/make_excel.py
+    deps:
+    - path: data/proc/companies.parquet
+      hash: md5
+      md5: 4d8e6f663bebabc1c8358b00060ccc48
+      size: 270611
+    - path: data/proc/conversions.parquet
+      hash: md5
+      md5: c45d8bc5a5f684b00f5c69286f30b39a
+      size: 3803
+    - path: data/proc/entities.parquet
+      hash: md5
+      md5: f9f1758baeae230f1d4112ef4081fc0b
+      size: 418887
+    - path: data/proc/groups.parquet
+      hash: md5
+      md5: 0fc7f9cf91d9018fd8ebf14037c87bb7
+      size: 327314
+    - path: data/proc/industries.parquet
+      hash: md5
+      md5: c31b3628544fbb5a7f8c04bb5984800a
+      size: 2495
+    - path: data/proc/prices.parquet
+      hash: md5
+      md5: d8b25b6e4aa00d37e9dc76466ed75716
+      size: 5047
+    - path: data/proc/ranking.parquet
+      hash: md5
+      md5: dabfd563adb10a675e05629b46b012a6
+      size: 229780
+    - path: data/proc/records.parquet
+      hash: md5
+      md5: 0cdb16e17bc5f09e22a24a65c4a4d8d6
+      size: 768163
+    - path: data/proc/relations.parquet
+      hash: md5
+      md5: 83d92adaeb4724e6835fb7b5f1148e40
+      size: 568468
+    - path: data/proc/shares.parquet
+      hash: md5
+      md5: 9804e47fc9a19fe55bfcd53721eec210
+      size: 139636
+    - path: data/proc/yearly.parquet
+      hash: md5
+      md5: 443bc2feb227280772b699d1b0995057
+      size: 474029
+    - path: kingpol/dataset/proc.py
+      hash: md5
+      md5: 98feae6010b482b73476b08aca198ee1
+      size: 2847
+    - path: kingpol/excel.py
+      hash: md5
+      md5: 7fdcbc780559f1444d2d5e15e3e5f85f
+      size: 795
+    - path: scripts/make_excel.py
+      hash: md5
+      md5: f1c0694ae673159b2b1449a2a0258f2f
+      size: 1171
+    outs:
+    - path: data/proc/kingpol.xlsx
+      hash: md5
+      md5: c012c3e1c4634bed128cdcaf25600925
+      size: 10256859
+  tables:
+    cmd: python scripts/make_tables.py
+    deps:
+    - path: data/proc/yearly.parquet
+      hash: md5
+      md5: 443bc2feb227280772b699d1b0995057
+      size: 474029
+    - path: kingpol/dataset/proc.py
+      hash: md5
+      md5: 98feae6010b482b73476b08aca198ee1
+      size: 2847
+    - path: kingpol/excel.py
+      hash: md5
+      md5: 7fdcbc780559f1444d2d5e15e3e5f85f
+      size: 795
+    - path: kingpol/stats.py
+      hash: md5
+      md5: f5c4c2edf6d5387a43a0211148c2c400
+      size: 748
+    - path: scripts/make_tables.py
+      hash: md5
+      md5: 30b362617352af6c5a618dbdf1f7b687
+      size: 5633
+    params:
+      params.yaml:
+        tables:
+          employment_and_value:
+            governorate: Governorates (1911)
+            industry: Industries (1911)
+            subsector: Sectors (1911)
+    outs:
+    - path: data/proc/tables.xlsx
+      hash: md5
+      md5: f73a9e08795bcb28a69bab9d6e777c22
+      size: 23787
+  codebook:
+    cmd: python scripts/make_codebook.py
+    deps:
+    - path: data/proc/kingpol.xlsx
+      hash: md5
+      md5: c012c3e1c4634bed128cdcaf25600925
+      size: 10256859
+    - path: kingpol/dataset/models
+      hash: md5
+      md5: abf78a7b5b8f2d983002e822b0cf07c7.dir
+      size: 94010
+      nfiles: 26
+    - path: kingpol/strings.py
+      hash: md5
+      md5: 587f073b4591af0c60c882c101b90f75
+      size: 455
+    - path: scripts/make_codebook.py
+      hash: md5
+      md5: 4708b5c97676623be88ed66f0b116f3e
+      size: 1588
+  readme:
+    cmd: python scripts/make_readme.py
+    deps:
+    - path: data/proc/kingpol.xlsx
+      hash: md5
+      md5: c012c3e1c4634bed128cdcaf25600925
+      size: 10256859
+    - path: kingpol/dataset/models
+      hash: md5
+      md5: abf78a7b5b8f2d983002e822b0cf07c7.dir
+      size: 94010
+      nfiles: 26
+    - path: kingpol/strings.py
+      hash: md5
+      md5: 587f073b4591af0c60c882c101b90f75
+      size: 455
+    - path: scripts/make_readme.py
+      hash: md5
+      md5: f11a6a955ee11cad9045aa35db00b0f0
+      size: 3436

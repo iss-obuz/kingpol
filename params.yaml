@@ -1,0 +1,67 @@
+years:
+  - 1904
+  - 1905
+  - 1906
+  - 1907
+  - 1908
+  - 1909
+  - 1910
+  - 1911
+
+test: "${oc.decode:${oc.env:BOURGEOISIE_TEST,true}}"
+
+records:
+  industries:
+    min_complete: 0.1
+  outliers:
+    threshold: 0.5
+  governorates:
+  - warszawska
+  - piotrkowska
+  - radomska
+  - kaliska
+  - lubelska
+  - kielecka
+  - siedlecka
+  - łomżyńska
+  - płocka
+  - suwalska
+
+yearly:
+  outliers:
+    threshold: 0.5
+  sectors:
+  - industry
+
+companies:
+  outliers:
+    threshold: 0.5
+
+shares:
+  relations:
+  - owner
+  - namesake
+  - president
+
+ranking:
+  use:
+  - value_share
+  - employment_share
+  - value_total
+  - employment_total
+  sortby:
+  - latent
+  - employment_total
+  latent:
+    mask: 1000
+    alpha: 0.001
+
+elite:
+  min_value: 1000000
+  min_employment: 500
+
+tables:
+  employment_and_value:
+    governorate: "Governorates (1911)"
+    industry: "Industries (1911)"
+    subsector: "Sectors (1911)"

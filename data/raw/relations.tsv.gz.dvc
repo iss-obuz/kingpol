@@ -1,0 +1,5 @@
+outs:
+- md5: 73e24e405500713b86940047d58368c7
+  size: 2245461
+  hash: md5
+  path: relations.tsv.gz

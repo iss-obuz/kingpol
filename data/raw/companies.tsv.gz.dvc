@@ -1,0 +1,5 @@
+outs:
+- md5: 16934d114f464e9df6fcac528c817425
+  size: 2088560
+  hash: md5
+  path: companies.tsv.gz
