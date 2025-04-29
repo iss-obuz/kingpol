@@ -1,14 +1,14 @@
 years:
-  - 1904
-  - 1905
-  - 1906
-  - 1907
-  - 1908
-  - 1909
-  - 1910
+  # - 1904
+  # - 1905
+  # - 1906
+  # - 1907
+  # - 1908
+  # - 1909
+  # - 1910
   - 1911
 
-test: "${oc.decode:${oc.env:BOURGEOISIE_TEST,true}}"
+test: "${oc.decode:${oc.env:KINGPOL_TEST,true}}"
 
 records:
   industries:

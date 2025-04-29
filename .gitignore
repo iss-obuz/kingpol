@@ -1,4 +1,7 @@
 # Root level
+README.pdf
+CODEBOOK.pdf
+mermaid-*.err
 _sandbox.py
 sandbox/
 build/

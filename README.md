@@ -1,4 +1,7 @@
-``KINGPOL_INDUSTRY``: Industry and bourgeoisie in Kingdom of Poland, 1904-1911
+# ``KINGPOL_INDUSTRY``: Industry and bourgeoisie in Kingdom of Poland, 1904-1911
+
+> [!NOTE]
+> Access online version [here](https://github.com/iss-obuz/kingpol/blob/master/README.md)
 
 This repository contains code and auxiliary files as well as instructions
 for obtaining the raw data necessary for reproducing the ``KINGPOL_INDUSTRY`` database.
@@ -49,7 +52,20 @@ background see the following publication:
 
 ## Contact & data access
 
-> TODO
+Main software developer:
+
+* Szymon Talaga, `<stalaga@uw.edu.pl>`
+
+Academic project leaders and other contributors are listed in the
+[journal publication](#journal-publication).
+
+### Reporting errors
+
+While reporting errors via email is possible, it is highly recommended
+to use the [issue tracker](https://github.com/iss-obuz/kingpol/issues) of the repository.
+This allows for better tracking of the issues and their resolution.
+Moreover, it allows for other users to see the issues and their resolution,
+which may be helpful for them as well.
 
 ## Definitions
 
@@ -158,6 +174,40 @@ or entities and individual records are identified by unique identifiers
 (primarily: `company_id`, `record_id` and `entity_id`). This allows for
 joining tables and answering complex queries.
 
+In particular, the following relational joins are possible:
+
+```mermaid
+flowchart LR
+    CR[(CompanyRecord)] -->|company_id| CYR[(CompanyYearlyRecord)]
+    CR -->|company_id| C[(Company)]
+    E[(Entity)] -->|entity_id| R[(Relation)]
+    CR -->|record_id| R
+```
+
+### Overview of the construction of company statistics
+
+The following diagram illustrates the main steps in the (re)construction
+of the company from Address Book records.
+
+```mermaid
+flowchart LR
+    A[(**CompanyRecord**
+    - Possibly multiple entries per company-year
+    - Irregular reporting)]
+    B[(**CompanyYearlyRecord**
+    - One record per year
+    - Missing data filled from previous data)]
+    C[(**Company**
+    - aggregated yearly statistics
+    )]
+
+    A --> AT{Merge related records
+             Fill missing data
+             Remove outliers} --> B
+    B --> BT{Average yearly records
+             Remove outlier} --> C
+```
+
 ### Dataset compilation
 
 Compilation of the dataset is a multi-step process consisting of several stages,
@@ -245,12 +295,14 @@ recompiling the dataset with different assumptions.
 Specifics of how different parameters affects particular tables
 are discussed in the [CODEBOOK](CODEBOOK.md).
 
-#### Developer notes
+In particular, `years` parameter list can be used to control the years included
+when aggregating yearly records for the `Company` and `EntityRanking` tables.
 
-Currently no additional developer notes are available.
-Interested developers are encouraged to contact the authors of the dataset
-and/or study the code in the repository, most of which should be
-quite self-explanatory for Python developers.
+**IMPORTANT.**
+When compiling for a subset of years or some other non-standard selection parameters,
+turn of testing by setting `test: false` in the `params.yaml` file, or compiling
+with environment variable `KINGPOL_TEST=false`. See [developer notes](#developer-notes)
+for more details.
 
 ### MD5 checksums
 
@@ -271,7 +323,7 @@ The checksums are read from the [dvc.lock](dvc.lock) file.
 
 	* `data/aux/prices.xlsx`: `ed72692acae68ab4a715d737b317df8f`
 
-	* `data/aux/corrections.xlsx`: `dd923e428e7314c24b419e4a95868a8d`
+	* `data/aux/corrections.xlsx`: `cd2fbb598308c8ee539b8bac2c316adb`
 
 	* `data/aux/properties.xlsx`: `99d75b68d61e71ee359450418018b894`
 
@@ -324,3 +376,85 @@ in a given industry cannot be too large. The algorithm works as follows:
    order of magnitude.
 4. If any records has been outsider the range, repeat steps 1-3.
 5. Finally, records with `outlier_score > 0` are considered outliers.
+
+### Developer notes
+
+Currently no detailed additional developer notes are available.
+Interested developers are encouraged to contact the authors of the dataset
+and/or study the code in the repository, most of which should be
+quite self-explanatory for Python developers. Below only a very brief overview is
+provided.
+
+#### Setting up the environment
+
+We recommend using [Conda package manager](https://anaconda.org/anaconda/conda) for setting up the environment. We will use it in what follows.
+
+First, use [GIT](https://git-scm.com/) to clone the repository,
+and navigate to the root directory of the repository:
+
+```{bash}
+git clone git@github.com:iss-obuz/kingpol.git
+cd kingpol
+```
+
+Then, create and activate a new environment with the following commands:
+
+```{bash}
+conda env create -f environment.yml
+conda activate kingpol
+```
+
+Install the local `kingpol` package, its dependencies and configure DVC.
+This is a somewhat complex process, so a helper `make` command is provided
+(and defined in `Makefile`) to do this automatically.
+
+```{bash}
+make init
+```
+
+Now, the structure of the DVC pipeline can be inspected with:
+
+```{bash}
+dvc stage list
+
+# OR
+
+dvc dag
+```
+
+#### Compiling the dataset
+
+The dataset can be compiled with the following command:
+
+```{bash}
+dvc repro
+```
+
+An individual stage can be run with:
+
+```{bash}
+dvc repro <stage_name>
+```
+
+where `<stage_name>` is the name of the stage to be run.
+Learn more about DVC [here](https://dvc.org/doc/start).
+
+This will compile the dataset with the default parameters defined in
+`params.yaml` file. To run the pipeline without running tests
+(this is often necessary when compiling with changed parameters)
+set the `test` parameter to `false` in the `params.yaml` file
+or run the pipeline with the following command:
+
+```{bash}
+dvc repro --set-param test=false
+```
+
+Alternatively, the `KINGPOL_TEST` environment variable can be set to `false`
+when running the pipeline:
+
+```{bash}
+export KINGPOL_TEST=false dvc repro
+```
+
+But note that this disables testing for all subsequent DVC runs within the same
+shell session.

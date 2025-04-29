@@ -19,6 +19,9 @@ codebook_path = root / "CODEBOOK.md"
 content = """
 # Codebook
 
+> [!NOTE]
+> Access online version [here](https://github.com/iss-obuz/kingpol/blob/master/CODEBOOK.md)
+
 This codebook provides a detailed description of the table and table fields included
 in the ``KINGPOL_INDUSTRY`` database. A general discussion of the database is provided
 in the ``README.md`` file.
@@ -38,6 +41,7 @@ for name, model in inspect.getmembers(models, inspect.isclass):
                 for name, field in model.model_fields.items()
             ]
         )
+        schema["description"] = schema["description"].str.wrap(60)
         content += schema.to_markdown(index=True).strip()
 
 # %% ---------------------------------------------------------------------------------

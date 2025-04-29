@@ -3,16 +3,107 @@
 import pandas as pd
 
 from kingpol import params, paths
-from kingpol.dataset import DataProc
+from kingpol.dataset import DataProc, DataRaw
 from kingpol.excel import write_sheet
 from kingpol.stats import gini
 
 # %% ---------------------------------------------------------------------------------
 
+raw = DataRaw(paths.raw)
 proc = DataProc(paths.proc)
 
+basic_tables = {}
 employment_and_value_tables = {}
 top_tables = {}
+
+# %% General summary -----------------------------------------------------------------
+
+records_raw = (
+    raw.companies.rename(
+        columns={"tom": "volume", "tro": "record_id", "troi": "company_id"}
+    )
+    .groupby(["volume"])
+    .size()
+)
+records_proc = (
+    proc.records.assign(
+        is_nonoutlier=lambda df: df["outlier_rank"].eq(0),
+        has_employment=lambda df: df["employment"].notnull(),
+        has_value=lambda df: df["value"].notnull(),
+        has_both=lambda df: df["has_employment"] & df["has_value"],
+    )
+    .groupby(["volume", "year"])
+    .apply(
+        lambda df: pd.Series(
+            {
+                "number of valid records": len(df),
+                "non-outlier records": df["is_nonoutlier"].sum(),
+                "records with employment": df["has_employment"].sum(),
+                "records with value": df["has_value"].sum(),
+                "records with both": df["has_both"].sum(),
+            }
+        ),
+        include_groups=False,
+    )
+)
+records_proc.insert(0, "number of records", records_raw.to_numpy())
+
+records_table = (
+    pd.concat(
+        {
+            "n": records_proc,
+            "%": records_proc.div(records_raw, axis=0) * 100,
+        }
+    )
+    .swaplevel(0, 2, axis=0)
+    .swaplevel(0, 1, axis=0)
+    .sort_index(level=[0, 1, 2], axis=0, ascending=[True, True, False])
+    .style.format(
+        precision=0, subset=pd.IndexSlice[pd.IndexSlice[:, :, "n"], :], na_rep="—"
+    )
+    .format(precision=1, subset=pd.IndexSlice[pd.IndexSlice[:, :, "%"], :], na_rep="—")
+)
+
+yearly_table = (
+    proc.yearly.assign(
+        has_employment=lambda df: df["employment"].notnull(),
+        has_value=lambda df: df["value"].notnull(),
+        has_both=lambda df: df["has_employment"] & df["has_value"],
+    )
+    .groupby(["year"])
+    .apply(
+        lambda df: pd.Series(
+            {
+                "number of records": len(df),
+                "records with employment": df["has_employment"].sum(),
+                "records with value": df["has_value"].sum(),
+                "records with both": df["has_both"].sum(),
+            }
+        ),
+        include_groups=False,
+    )
+    .pipe(
+        lambda df: pd.concat(
+            {
+                "n": df,
+                "%": df.div(df.iloc[:, 0], axis=0) * 100,
+            }
+        )
+    )
+    .swaplevel(0, 1, axis=0)
+    .sort_index(level=[0, 1], axis=0, ascending=[True, False])
+    .style.format(
+        precision=0, subset=pd.IndexSlice[pd.IndexSlice[:, "n"], :], na_rep="—"
+    )
+    .format(precision=1, subset=pd.IndexSlice[pd.IndexSlice[:, "%"], :], na_rep="—")
+)
+
+basic_tables.update(
+    {
+        "Reported records summary": records_table,
+        "Yearly records summary": yearly_table,
+    }
+)
 
 # %% Employment & value in 1911 ------------------------------------------------------
 
@@ -182,6 +273,8 @@ top_tables["Wealthiest entities (1904-1911)"] = legal.set_index("fullname")
 # %% Write tables --------------------------------------------------------------------
 
 with pd.ExcelWriter(paths.proc.tables, engine="xlsxwriter") as writer:
+    for name, table in basic_tables.items():
+        write_sheet(table, writer, name, index=True)
     for name, table in top_tables.items():
         write_sheet(table, writer, name, index=True)
     for name, table in employment_and_value_tables.items():

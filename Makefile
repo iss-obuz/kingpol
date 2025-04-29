@@ -18,6 +18,14 @@ init:
 	dvc remote add  --default kingpol ${PWD}/data/remote --local --force
 	dvc config core.autostage true
 
+readme:
+	pandoc README.md -o README.pdf --filter=mermaid-filter --variable colorlinks=true --variable margin-left=2cm --variable margin-right=2cm
+
+codebook:
+	pandoc CODEBOOK.md -o CODEBOOK.pdf --variable colorlinks=true --variable margin-left=1cm --variable margin-right=1cm
+
+pdfs: readme codebook
+
 clean: clean-build clean-misc
 
 clean-build:
