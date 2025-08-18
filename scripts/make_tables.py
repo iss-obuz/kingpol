@@ -235,8 +235,8 @@ top_tables["Companies (1911)"] = companies1911_top.set_index("name")
 
 persons = (
     proc.ranking.query("elite & physical")
-    .query("birth_year.notnull() & birth_year.lt(1880)")
-    .query("death_year.notnull() & death_year.gt(1911)")
+    .query("birth_year.notnull() & birth_year.le(1880)")
+    .query("death_year.notnull() & death_year.ge(1904)")
     .sort_values("value_share", ascending=False, ignore_index=True)
     .head(30)[
         [
@@ -268,7 +268,7 @@ legal = (
     ]
 )
 
-top_tables["Wealthiest entities (1904-1911)"] = legal.set_index("fullname")
+top_tables["Wealthiest entities (1911)"] = legal.set_index("fullname")
 
 # %% Write tables --------------------------------------------------------------------
 

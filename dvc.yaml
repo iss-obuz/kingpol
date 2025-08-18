@@ -207,6 +207,8 @@ stages:
     - kingpol/excel.py
     - scripts/make_tables.py
     - data/proc/yearly.parquet
+    - data/proc/entities.parquet
+    - data/proc/ranking.parquet
     params:
     - tables
     outs:

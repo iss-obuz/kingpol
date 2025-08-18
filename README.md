@@ -50,6 +50,17 @@ background see the following publication:
 
 > TODO
 
+**IMPORTANT.**
+The publication corresponds to version `v1` of the database,
+which is archived and available at a dedicated
+[`v1` branch](https://github.com/iss-obuz/kingpol/tree/v1),
+which is also marked with `v1` tag.
+To clone this exact version of the repository, use the following command:
+
+```{bash}
+git clone --branch v1 git@github.com:iss-obuz/kingpol.git
+```
+
 ## Contact & data access
 
 Main software developer:
@@ -323,7 +334,7 @@ The checksums are read from the [dvc.lock](dvc.lock) file.
 
 	* `data/aux/prices.xlsx`: `ed72692acae68ab4a715d737b317df8f`
 
-	* `data/aux/corrections.xlsx`: `cd2fbb598308c8ee539b8bac2c316adb`
+	* `data/aux/corrections.xlsx`: `2b5b1ea7afbe6c32dca33ffe727e0faf`
 
 	* `data/aux/properties.xlsx`: `99d75b68d61e71ee359450418018b894`
 
