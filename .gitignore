@@ -1,6 +1,4 @@
 # Root level
-README.pdf
-CODEBOOK.pdf
 mermaid-*.err
 _sandbox.py
 sandbox/
@@ -22,3 +20,5 @@ __pycache__/
 **/.pytype/
 **/*.egg-info/
 **/__pycache__/
+/CODEBOOK.pdf
+/README.pdf

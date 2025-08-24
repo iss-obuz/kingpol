@@ -8,7 +8,7 @@ EntityId = FieldDef(
     type=str,
     field=Field(
         title="Entity ID",
-        description=("Unique entity identifier." "Can be used for joining tables."),
+        description=("Unique entity identifier. Can be used for joining tables."),
     ),
 )
 

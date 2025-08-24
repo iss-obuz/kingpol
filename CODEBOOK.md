@@ -1,3 +1,7 @@
+---
+lang: en-US
+---
+
 # Codebook
 
 > [!NOTE]
@@ -13,12 +17,12 @@ in the ``README.md`` file.
 
 Company information and statistics aggregated over yearly records.
 
-Compilation of this table is controlled  by the following parameter
+Compilation of this table is controlled by the following parameter
 groups in ``params.yaml`` file:
 
 * `years`: yearly records to be included and aggregated in the table
 * `companies`: other parameters specific to the table,
-e.g. threshold for outlier dectection.
+e.g. threshold for outlier detection.
 
 |    | label        | field           | description                                                |
 |---:|:-------------|:----------------|:-----------------------------------------------------------|
@@ -148,31 +152,31 @@ Exchange rates to Russian rubles.
 Entity information including indication of physical vs legal person.
 Most fields are defined only for physical persons.
 
-|    | label         | field       | description                                              |
-|---:|:--------------|:------------|:---------------------------------------------------------|
-|  0 | entity_id     | Entity ID   | Unique entity identifier.Can be used for joining tables. |
-|  1 | surname       | Surname     | Surname of the person.                                   |
-|  2 | name          | Name        | Name of the person.                                      |
-|  3 | name2         | Name        | Name of the person.                                      |
-|  4 | name3         | Name        | Name of the person.                                      |
-|  5 | fullname      | Full name   | Full name of the entity.                                 |
-|  6 | physical      | Physical    | Whether the entity is a physical person.                 |
-|  7 | legal         | Legal       | Whether the entity is a legal person.                    |
-|  8 | sex           | Sex         | Sex of the person.                                       |
-|  9 | title_noble   | Noble title | Noble title of the entity.                               |
-| 10 | title_other   | Other title | Other title of the entity.                               |
-| 11 | birth_year    | Year        | Year of a biographical event.                            |
-| 12 | birth_month   | Month       | Month of a biographical event.                           |
-| 13 | birth_day     | Day         | Day of a biographical event.                             |
-| 14 | death_year    | Year        | Year of a biographical event.                            |
-| 15 | death_month   | Month       | Month of a biographical event.                           |
-| 16 | death_day     | Day         | Day of a biographical event.                             |
-| 17 | baptism_year  | Year        | Year of a biographical event.                            |
-| 18 | baptism_month | Month       | Month of a biographical event.                           |
-| 19 | baptism_day   | Day         | Day of a biographical event.                             |
-| 20 | burial_year   | Year        | Year of a biographical event.                            |
-| 21 | burial_month  | Month       | Month of a biographical event.                           |
-| 22 | burial_day    | Day         | Day of a biographical event.                             |
+|    | label         | field       | description                                               |
+|---:|:--------------|:------------|:----------------------------------------------------------|
+|  0 | entity_id     | Entity ID   | Unique entity identifier. Can be used for joining tables. |
+|  1 | surname       | Surname     | Surname of the person.                                    |
+|  2 | name          | Name        | Name of the person.                                       |
+|  3 | name2         | Name        | Name of the person.                                       |
+|  4 | name3         | Name        | Name of the person.                                       |
+|  5 | fullname      | Full name   | Full name of the entity.                                  |
+|  6 | physical      | Physical    | Whether the entity is a physical person.                  |
+|  7 | legal         | Legal       | Whether the entity is a legal person.                     |
+|  8 | sex           | Sex         | Sex of the person.                                        |
+|  9 | title_noble   | Noble title | Noble title of the entity.                                |
+| 10 | title_other   | Other title | Other title of the entity.                                |
+| 11 | birth_year    | Year        | Year of a biographical event.                             |
+| 12 | birth_month   | Month       | Month of a biographical event.                            |
+| 13 | birth_day     | Day         | Day of a biographical event.                              |
+| 14 | death_year    | Year        | Year of a biographical event.                             |
+| 15 | death_month   | Month       | Month of a biographical event.                            |
+| 16 | death_day     | Day         | Day of a biographical event.                              |
+| 17 | baptism_year  | Year        | Year of a biographical event.                             |
+| 18 | baptism_month | Month       | Month of a biographical event.                            |
+| 19 | baptism_day   | Day         | Day of a biographical event.                              |
+| 20 | burial_year   | Year        | Year of a biographical event.                             |
+| 21 | burial_month  | Month       | Month of a biographical event.                            |
+| 22 | burial_day    | Day         | Day of a biographical event.                              |
 
 ### EntityRanking
 
@@ -190,7 +194,7 @@ calculating shares.
 
 |    | label            | field                    | description                                                  |
 |---:|:-----------------|:-------------------------|:-------------------------------------------------------------|
-|  0 | entity_id        | Entity ID                | Unique entity identifier.Can be used for joining tables.     |
+|  0 | entity_id        | Entity ID                | Unique entity identifier. Can be used for joining tables.    |
 |  1 | fullname         | Full name                | Full name of the entity.                                     |
 |  2 | elite            | Elite                    | Whether belongs to elite (see 'params.yaml' for the          |
 |    |                  |                          | inclusion criteria).                                         |
@@ -233,7 +237,7 @@ not be derived by joining and transforming other tables.
 
 |    | label         | field           | description                                                |
 |---:|:--------------|:----------------|:-----------------------------------------------------------|
-|  0 | entity_id     | Entity ID       | Unique entity identifier.Can be used for joining tables.   |
+|  0 | entity_id     | Entity ID       | Unique entity identifier. Can be used for joining tables.  |
 |  1 | fullname      | Full name       | Full name of the entity.                                   |
 |  2 | elite         | Elite           | Whether belongs to elite (see 'params.yaml' for the        |
 |    |               |                 | inclusion criteria).                                       |
@@ -284,7 +288,7 @@ Relations between entities (physical or legal persons) and companies.
 
 |    | label     | field         | description                                               |
 |---:|:----------|:--------------|:----------------------------------------------------------|
-|  0 | entity_id | Entity ID     | Unique entity identifier.Can be used for joining tables.  |
+|  0 | entity_id | Entity ID     | Unique entity identifier. Can be used for joining tables. |
 |  1 | record_id | Record ID     | Unique company-record identifier. Can be used for joining |
 |    |           |               | tables.                                                   |
 |  2 | relation  | Relation type | Type of the person-company relation.                      |

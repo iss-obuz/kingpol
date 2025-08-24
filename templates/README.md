@@ -1,3 +1,7 @@
+---
+lang: en-US
+---
+
 # ``KINGPOL_INDUSTRY``: Industry and bourgeoisie in Kingdom of Poland, 1904-1911
 
 > [!NOTE]
@@ -339,7 +343,7 @@ The checksums are read from the [dvc.lock](dvc.lock) file.
 
 	* `data/aux/prices.xlsx`: `ed72692acae68ab4a715d737b317df8f`
 
-	* `data/aux/corrections.xlsx`: `d289c4adcd3b9a8a605af5cc5c1dc81f`
+	* `data/aux/corrections.xlsx`: `2b5b1ea7afbe6c32dca33ffe727e0faf`
 
 	* `data/aux/properties.xlsx`: `99d75b68d61e71ee359450418018b894`
 

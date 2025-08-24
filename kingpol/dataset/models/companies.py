@@ -22,12 +22,12 @@ from kingpol.dataset.fields import (
 class Company(BaseModel):
     """Company information and statistics aggregated over yearly records.
 
-    Compilation of this table is controlled  by the following parameter
+    Compilation of this table is controlled by the following parameter
     groups in ``params.yaml`` file:
 
     * `years`: yearly records to be included and aggregated in the table
     * `companies`: other parameters specific to the table,
-      e.g. threshold for outlier dectection.
+      e.g. threshold for outlier detection.
     """
 
     company_id: CompanyId.T = CompanyId.field

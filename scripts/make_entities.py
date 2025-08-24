@@ -41,7 +41,7 @@ entities = (
     .pipe(lambda df: aux.corrections_entities.combine_first(df))
     .reset_index()
     .convert_dtypes()
-    .fillna(pd.NA)
+    .fillna(pd.NA)[list(Entity.model_fields)]
 )
 
 # %% Test consistency ----------------------------------------------------------------

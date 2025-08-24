@@ -59,7 +59,6 @@ ranking = (
         ]
     ]
     .query("value_share.notnull() | employment_share.notnull()")
-    .sort_values("value_share", ascending=False, ignore_index=True)
     .assign(
         elite=lambda df: (
             df["value_share"].ge(params.elite.min_value)
@@ -73,6 +72,7 @@ ranking = (
     .pipe(lambda s: pd.DataFrame(s.tolist()))
     .query("physical or legal")
     .reset_index(drop=True)
+    .sort_values("value_share", ascending=False, ignore_index=True)
     .convert_dtypes()
 )
 

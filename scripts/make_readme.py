@@ -14,11 +14,12 @@ from kingpol.strings import normalize_docstring
 
 root = Path(__file__).parent.parent.absolute()
 dvclock_path = root / "dvc.lock"
+template_path = root / "templates" / "README.md"
 readme_path = root / "README.md"
 
 # %% ---------------------------------------------------------------------------------
 
-with readme_path.open("r") as fh:
+with template_path.open("r") as fh:
     content = fh.read().strip()
 
 # %% ---------------------------------------------------------------------------------
@@ -26,8 +27,10 @@ with readme_path.open("r") as fh:
 sections = [
     tuple(s.strip() for s in re.split(r"\n+", section, maxsplit=1))
     for section in re.split(r"^(?=#)", content, flags=re.MULTILINE)
-    if section
+    if section and not section.startswith("---\n")
 ]
+
+# %% ---------------------------------------------------------------------------------
 
 maintables_section = [
     i
@@ -111,6 +114,6 @@ content = "\n\n".join(content)
 # %% ---------------------------------------------------------------------------------
 
 with readme_path.open("w") as fh:
-    fh.write(content.strip())
+    fh.write(content.strip() + "\n")
 
 # %% ---------------------------------------------------------------------------------

@@ -1,10 +1,9 @@
 # %% ---------------------------------------------------------------------------------
 
-import pandas as pd
+import numpy as np
 
 from kingpol import params, paths
 from kingpol.dataset import DataProc
-from kingpol.dataset.models import Shares
 
 # from bourgeoisie.ranking import comparisons, rank
 
@@ -18,48 +17,87 @@ relations = proc.relations.pipe(
     lambda df: df[df["relation"].isin(params.shares.relations)]
 )
 
-# %% Entity shares -------------------------------------------------------------------
-
-entity_shares = (
-    relations.groupby(["record_id", "entity_id"])
-    .size()
-    .reset_index(name="entity_shares")
-    .merge(
-        proc.records[["company_id", "record_id", "year"]],
-        how="left",
-        on="record_id",
-    )
-    .dropna(subset="company_id", ignore_index=True)
-    .merge(proc.yearly[["company_id", "year"]], how="outer", on=["company_id", "year"])
-    .groupby(["company_id", "entity_id"])
-    .apply(lambda df: df.ffill(), include_groups=False)
-    .reset_index(["company_id", "entity_id"])
-    .reset_index(drop=True)
-    .pipe(lambda df: df[df["year"].isin(params.years)])
-    .reset_index(drop=True)
-    .groupby(["company_id", "entity_id"])[["entity_shares"]]
-    .sum()
-    .reset_index()
-)
-
 # %% Company shares ------------------------------------------------------------------
 
 company_shares = (
-    entity_shares.groupby(["company_id"])["entity_shares"]
-    .sum()
+    relations.merge(
+        proc.records[["company_id", "record_id", "year"]], how="left", on="record_id"
+    )
+    .dropna(ignore_index=True)
+    .groupby(["company_id", "year"])
+    .size()
     .reset_index(name="n_shares")
+    .merge(proc.yearly[["company_id", "year"]], how="outer", on=["company_id", "year"])
+    .assign(reports=lambda df: df["n_shares"].notnull())
+    .groupby(["company_id"])
+    .apply(lambda df: df.ffill().bfill(), include_groups=False)
+    .reset_index(["company_id"])
+    .dropna(ignore_index=True)
+    .assign(n_shares=lambda df: df["n_shares"].astype(int))
 )
 
-# %% Proportional shares -------------------------------------------------------------
+# %% Entity shares -------------------------------------------------------------------
+
+
+year_ranges = (
+    proc.yearly[["company_id", "year"]]
+    .groupby("company_id")["year"]
+    .agg(["min", "max"])
+    .reset_index()
+)
+
+possible_relations = (
+    relations.merge(
+        proc.records[["company_id", "record_id", "year"]], how="left", on="record_id"
+    )[["entity_id", "company_id"]]
+    .dropna()
+    .drop_duplicates(ignore_index=True)
+    .merge(year_ranges, how="left", on="company_id")
+    .dropna(ignore_index=True)
+    .assign(
+        year=lambda df: (df.apply(lambda r: np.arange(r["min"], r["max"] + 1), axis=1))
+    )
+    .drop(columns=["min", "max"])
+    .explode("year", ignore_index=True)
+)
+
+assert (
+    possible_relations.groupby(["entity_id", "company_id"])["year"].min().gt(1904).any()
+), "All starting years are equal to 1904, which is suspicious."
+
+# %% ---------------------------------------------------------------------------------
 
 shares = (
-    entity_shares.merge(company_shares, how="left", on="company_id")
-    .assign(share=lambda df: df["entity_shares"] / df["n_shares"])
-    .pipe(
-        lambda df: pd.DataFrame(
-            [Shares(**record).model_dump() for record in df.to_dict(orient="records")]
+    relations.merge(
+        proc.records[["company_id", "record_id", "year"]], how="left", on="record_id"
+    )
+    .groupby(["entity_id", "company_id", "year"])
+    .size()
+    .reset_index(name="entity_shares")
+    .merge(possible_relations, how="right", on=["entity_id", "company_id", "year"])
+    .sort_values(["entity_id", "company_id", "year"], ascending=True, ignore_index=True)
+    .merge(company_shares, how="left", on=["company_id", "year"])
+    .assign(
+        entity_shares=lambda df: np.where(
+            df["entity_shares"].isnull() & df["reports"], 0, df["entity_shares"]
         )
     )
+    .groupby(["entity_id", "company_id"])
+    .apply(
+        lambda df: df.assign(
+            entity_shares=lambda d: d["entity_shares"].ffill().bfill()
+        ),
+        include_groups=False,
+    )
+    .reset_index(["entity_id", "company_id"])
+    .query("entity_shares.notnull() & entity_shares > 0")
+    .reset_index(drop=True)
+    .drop(columns=["reports"])
+    .assign(
+        entity_shares=lambda df: df["entity_shares"].astype(int),
+        share=lambda df: df["entity_shares"] / df["n_shares"],
+    )
+    .convert_dtypes()
 )
 
 # %% Consistency tests ---------------------------------------------------------------

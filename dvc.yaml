@@ -178,12 +178,12 @@ stages:
     - data/proc/groups.parquet:
         persist: true
 
-  excel:
-    cmd: python scripts/make_excel.py
+  kingpol:
+    cmd: python scripts/make_kingpol.py
     deps:
     - kingpol/dataset/proc.py
     - kingpol/excel.py
-    - scripts/make_excel.py
+    - scripts/make_kingpol.py
     - data/proc/conversions.parquet
     - data/proc/prices.parquet
     - data/proc/industries.parquet
@@ -216,17 +216,31 @@ stages:
         persist: true
 
   codebook:
-    cmd: python scripts/make_codebook.py
+    cmd: python scripts/make_codebook.py && make codebook
     deps:
+    - kingpol/dataset/fields
     - kingpol/dataset/models
     - kingpol/strings.py
     - scripts/make_codebook.py
     - data/proc/kingpol.xlsx
+    outs:
+    - CODEBOOK.md:
+        persist: true
+        cache: false
+    - CODEBOOK.pdf:
+        persist: true
 
   readme:
-    cmd: python scripts/make_readme.py
+    cmd: python scripts/make_readme.py && make readme
     deps:
     - kingpol/dataset/models
     - kingpol/strings.py
     - scripts/make_readme.py
     - data/proc/kingpol.xlsx
+    - templates/README.md
+    outs:
+    - README.md:
+        persist: true
+        cache: false
+    - README.pdf:
+        persist: true

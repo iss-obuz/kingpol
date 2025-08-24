@@ -17,6 +17,10 @@ codebook_path = root / "CODEBOOK.md"
 # %% ---------------------------------------------------------------------------------
 
 content = """
+---
+lang: en-US
+---
+
 # Codebook
 
 > [!NOTE]
@@ -47,6 +51,6 @@ for name, model in inspect.getmembers(models, inspect.isclass):
 # %% ---------------------------------------------------------------------------------
 
 with codebook_path.open("w") as fh:
-    fh.write(content.strip())
+    fh.write(content.strip() + "\n")
 
 # %% ---------------------------------------------------------------------------------

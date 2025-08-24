@@ -252,7 +252,7 @@ persons = (
     ]
 )
 
-top_tables["Wealthiest persons (1904-1911)"] = persons.set_index(["surname", "name"])
+top_tables["Wealthiest persons (1911)"] = persons.set_index(["surname", "name"])
 
 # %% Top legal entites by value ------------------------------------------------------
 
