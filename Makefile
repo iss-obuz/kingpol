@@ -20,6 +20,7 @@ init:
 
 readme:
 	pandoc README.md -o README.pdf --filter=mermaid-filter --variable colorlinks=true --variable margin-left=2cm --variable margin-right=2cm
+	# uses this: https://github.com/raghur/mermaid-filter
 
 codebook:
 	pandoc CODEBOOK.md -o CODEBOOK.pdf --variable colorlinks=true --variable margin-left=1cm --variable margin-right=1cm

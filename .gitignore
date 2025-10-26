@@ -1,5 +1,5 @@
 # Root level
-mermaid-*.err
+/mermaid-*
 _sandbox.py
 sandbox/
 build/

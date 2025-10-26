@@ -39,6 +39,11 @@ entities = (
     .pipe(lambda s: pd.DataFrame(s.tolist()))
     .set_index(["entity_id"])
     .pipe(lambda df: aux.corrections_entities.combine_first(df))
+    .pipe(
+        lambda df: (
+            aux.corrections_entity_deaths.combine_first(df).loc[df.index, df.columns]
+        )
+    )
     .reset_index()
     .convert_dtypes()
     .fillna(pd.NA)[list(Entity.model_fields)]

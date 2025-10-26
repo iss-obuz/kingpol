@@ -339,7 +339,7 @@ The checksums are read from the [dvc.lock](dvc.lock) file.
 
 	* `data/aux/prices.xlsx`: `ed72692acae68ab4a715d737b317df8f`
 
-	* `data/aux/corrections.xlsx`: `d289c4adcd3b9a8a605af5cc5c1dc81f`
+	* `data/aux/corrections.xlsx`: `5bdadd7e8b96447a5e83e2f4e6f97c4d`
 
 	* `data/aux/properties.xlsx`: `99d75b68d61e71ee359450418018b894`
 

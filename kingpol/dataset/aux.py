@@ -160,6 +160,15 @@ class DataAux:
         return data.pipe(lambda df: dict(zip(df["from"], df["to"], strict=True)))
 
     @cached_property
+    def corrections_entity_deaths(self) -> pd.DataFrame:
+        data = read_excel(self.paths.corrections, sheet_name="entity_death").set_index(
+            "entity_id"
+        )
+        assert data.index.is_unique
+        assert data.notnull().all().all()
+        return data
+
+    @cached_property
     def drop_record_ids(self) -> dict[str, str]:
         return read_excel(self.paths.corrections, sheet_name="drop_records")[
             "record_id"
