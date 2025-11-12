@@ -628,7 +628,7 @@ stages:
       nfiles: 14
     - path: kingpol/dataset/models
       hash: md5
-      md5: 2f5c3ab6af4f9f6a6b2d45210de1363c.dir
+      md5: 93eff609cd5169dd6aa1207143c3eab9.dir
       size: 94006
       nfiles: 26
     - path: kingpol/strings.py
@@ -646,7 +646,7 @@ stages:
       size: 22586
     - path: CODEBOOK.pdf
       hash: md5
-      md5: b9921c2252a08878768a3fe7ae2bf3c8
+      md5: c2ed9de55c19a8cded17546885bc49ce
       size: 139199
   readme:
     cmd: python scripts/make_readme.py && make readme
@@ -657,7 +657,7 @@ stages:
       size: 13488992
     - path: kingpol/dataset/models
       hash: md5
-      md5: 2f5c3ab6af4f9f6a6b2d45210de1363c.dir
+      md5: 93eff609cd5169dd6aa1207143c3eab9.dir
       size: 94006
       nfiles: 26
     - path: kingpol/strings.py
@@ -679,7 +679,7 @@ stages:
       size: 18009
     - path: README.pdf
       hash: md5
-      md5: fa2129b836e29845071d3e70906ae7f9
+      md5: b6a1633d18f7e47a07593319980e9957
       size: 264418
   kingpol:
     cmd: python scripts/make_kingpol.py
