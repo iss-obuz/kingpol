@@ -10,7 +10,7 @@ stages:
     - kingpol/dataset/models/prices.py
     - kingpol/dataset/models/currencies.py
     - scripts/make_prices.py
-    - data/aux/prices.xlsx
+    - data/aux/prices.ods
     outs:
     - data/proc/prices.parquet:
         persist: true
@@ -31,9 +31,9 @@ stages:
     - scripts/make_properties.py
     - data/raw/companies.tsv.gz
     - data/raw/properties.tsv.gz
-    - data/aux/properties.xlsx
-    - data/aux/corrections.xlsx
-    - data/aux/prices.xlsx
+    - data/aux/properties.ods
+    - data/aux/corrections.ods
+    - data/aux/prices.ods
     - data/proc/currencies.parquet
     outs:
     - data/proc/properties.parquet:
@@ -50,9 +50,9 @@ stages:
     - kingpol/outliers.py
     - scripts/make_records.py
     - data/raw/companies.tsv.gz
-    - data/aux/properties.xlsx
-    - data/aux/merging.xlsx
-    - data/aux/corrections.xlsx
+    - data/aux/properties.ods
+    - data/aux/merging.ods
+    - data/aux/corrections.ods
     - data/proc/properties.parquet
     - data/proc/prices.parquet
     - data/proc/conversions.parquet
@@ -73,8 +73,8 @@ stages:
     - kingpol/dataset/models/yearly.py
     - kingpol/outliers.py
     - scripts/make_yearly.py
-    - data/aux/merging.xlsx
-    - data/aux/properties.xlsx
+    - data/aux/merging.ods
+    - data/aux/properties.ods
     - data/proc/records.parquet
     params:
     - yearly
@@ -109,8 +109,8 @@ stages:
     - kingpol/dataset/fields/entities.py
     - kingpol/dataset/models/entities.py
     - scripts/make_entities.py
-    - data/aux/corrections.xlsx
-    - data/aux/merging.xlsx
+    - data/aux/corrections.ods
+    - data/aux/merging.ods
     - data/raw/entities.tsv.gz
     - data/raw/relations.tsv.gz
     outs:
@@ -126,7 +126,7 @@ stages:
     - kingpol/dataset/fields/relations.py
     - kingpol/dataset/models/relations.py
     - scripts/make_relations.py
-    - data/aux/corrections.xlsx
+    - data/aux/corrections.ods
     - data/raw/relations.tsv.gz
     outs:
     - data/proc/relations.parquet:
@@ -196,7 +196,7 @@ stages:
     - data/proc/ranking.parquet
     - data/proc/groups.parquet
     outs:
-    - data/proc/kingpol.xlsx:
+    - data/proc/kingpol.ods:
         persist: true
 
   tables:
@@ -212,7 +212,7 @@ stages:
     params:
     - tables
     outs:
-    - data/proc/tables.xlsx:
+    - data/proc/tables.ods:
         persist: true
 
   codebook:
@@ -222,7 +222,7 @@ stages:
     - kingpol/dataset/models
     - kingpol/strings.py
     - scripts/make_codebook.py
-    - data/proc/kingpol.xlsx
+    - data/proc/kingpol.ods
     outs:
     - CODEBOOK.md:
         persist: true
@@ -236,7 +236,7 @@ stages:
     - kingpol/dataset/models
     - kingpol/strings.py
     - scripts/make_readme.py
-    - data/proc/kingpol.xlsx
+    - data/proc/kingpol.ods
     - templates/README.md
     outs:
     - README.md:

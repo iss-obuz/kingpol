@@ -66,10 +66,10 @@ class PathsAux(Paths):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        self.properties = Path("properties.xlsx")
-        self.prices = Path("prices.xlsx")
-        self.corrections = Path("corrections.xlsx")
-        self.merging = Path("merging.xlsx")
+        self.properties = Path("properties.ods")
+        self.prices = Path("prices.ods")
+        self.corrections = Path("corrections.ods")
+        self.merging = Path("merging.ods")
 
 
 class PathsRaw(Paths):
@@ -101,8 +101,8 @@ class PathsProc(Paths):
         self.shares = Path("shares.parquet")
         self.ranking = Path("ranking.parquet")
         self.groups = Path("groups.parquet")
-        self.excel = Path("kingpol.xlsx")
-        self.tables = Path("tables.xlsx")
+        self.excel = Path("kingpol.ods")
+        self.tables = Path("tables.ods")
 
 
 class PathsContainer:

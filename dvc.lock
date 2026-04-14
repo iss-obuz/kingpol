@@ -3,10 +3,10 @@ stages:
   prices:
     cmd: python scripts/make_prices.py
     deps:
-    - path: data/aux/prices.xlsx
+    - path: data/aux/prices.ods
       hash: md5
-      md5: ed72692acae68ab4a715d737b317df8f
-      size: 34154
+      md5: 0d137393350e0866c1cf1bb50b86c3f7
+      size: 19697
     - path: kingpol/dataset/aux.py
       hash: md5
       md5: 000bec243039c95655b719c260be1a20
@@ -51,18 +51,18 @@ stages:
   properties:
     cmd: python scripts/make_properties.py
     deps:
-    - path: data/aux/corrections.xlsx
+    - path: data/aux/corrections.ods
       hash: md5
-      md5: 5bdadd7e8b96447a5e83e2f4e6f97c4d
-      size: 55782
-    - path: data/aux/prices.xlsx
+      md5: 25bbc6643f83f518ca9b2dbb0a6310aa
+      size: 57651
+    - path: data/aux/prices.ods
       hash: md5
-      md5: ed72692acae68ab4a715d737b317df8f
-      size: 34154
-    - path: data/aux/properties.xlsx
+      md5: 0d137393350e0866c1cf1bb50b86c3f7
+      size: 19697
+    - path: data/aux/properties.ods
       hash: md5
-      md5: 99d75b68d61e71ee359450418018b894
-      size: 51481
+      md5: e28d4046a6bca84b47bc05239d871f52
+      size: 59281
     - path: data/proc/currencies.parquet
       hash: md5
       md5: f6f226c193de0eb3ff264946f1c8cc20
@@ -111,18 +111,18 @@ stages:
   records:
     cmd: python scripts/make_records.py
     deps:
-    - path: data/aux/corrections.xlsx
+    - path: data/aux/corrections.ods
       hash: md5
-      md5: 5bdadd7e8b96447a5e83e2f4e6f97c4d
-      size: 55782
-    - path: data/aux/merging.xlsx
+      md5: 25bbc6643f83f518ca9b2dbb0a6310aa
+      size: 57651
+    - path: data/aux/merging.ods
       hash: md5
-      md5: 701bd227a57366efdd26c0f750700156
-      size: 9088
-    - path: data/aux/properties.xlsx
+      md5: 9661b5b7fd4fe98f8d86ad32b2d24bf8
+      size: 36925
+    - path: data/aux/properties.ods
       hash: md5
-      md5: 99d75b68d61e71ee359450418018b894
-      size: 51481
+      md5: e28d4046a6bca84b47bc05239d871f52
+      size: 59281
     - path: data/proc/conversions.parquet
       hash: md5
       md5: 16a267057fd2db72015771a9eed6a3a1
@@ -197,14 +197,14 @@ stages:
   yearly:
     cmd: python scripts/make_yearly.py
     deps:
-    - path: data/aux/merging.xlsx
+    - path: data/aux/merging.ods
       hash: md5
-      md5: 701bd227a57366efdd26c0f750700156
-      size: 9088
-    - path: data/aux/properties.xlsx
+      md5: 9661b5b7fd4fe98f8d86ad32b2d24bf8
+      size: 36925
+    - path: data/aux/properties.ods
       hash: md5
-      md5: 99d75b68d61e71ee359450418018b894
-      size: 51481
+      md5: e28d4046a6bca84b47bc05239d871f52
+      size: 59281
     - path: data/proc/records.parquet
       hash: md5
       md5: bf663936c960738357113779458ba243
@@ -294,14 +294,14 @@ stages:
   entities:
     cmd: python scripts/make_entities.py
     deps:
-    - path: data/aux/corrections.xlsx
+    - path: data/aux/corrections.ods
       hash: md5
-      md5: 5bdadd7e8b96447a5e83e2f4e6f97c4d
-      size: 55782
-    - path: data/aux/merging.xlsx
+      md5: 25bbc6643f83f518ca9b2dbb0a6310aa
+      size: 57651
+    - path: data/aux/merging.ods
       hash: md5
-      md5: 701bd227a57366efdd26c0f750700156
-      size: 9088
+      md5: 9661b5b7fd4fe98f8d86ad32b2d24bf8
+      size: 36925
     - path: data/raw/entities.tsv.gz
       hash: md5
       md5: eb43bf3ffa1fb9c85c0db07dac977d12
@@ -342,10 +342,10 @@ stages:
   relations:
     cmd: python scripts/make_relations.py
     deps:
-    - path: data/aux/corrections.xlsx
+    - path: data/aux/corrections.ods
       hash: md5
-      md5: 5bdadd7e8b96447a5e83e2f4e6f97c4d
-      size: 55782
+      md5: 25bbc6643f83f518ca9b2dbb0a6310aa
+      size: 57651
     - path: data/raw/relations.tsv.gz
       hash: md5
       md5: 73e24e405500713b86940047d58368c7
@@ -507,180 +507,6 @@ stages:
       hash: md5
       md5: 125b2db32124489a303be759f23dc6ee
       size: 399319
-  excel:
-    cmd: python scripts/make_excel.py
-    deps:
-    - path: data/proc/companies.parquet
-      hash: md5
-      md5: ec3af6116bd169f43ee41807d4ed4807
-      size: 251115
-    - path: data/proc/conversions.parquet
-      hash: md5
-      md5: c45d8bc5a5f684b00f5c69286f30b39a
-      size: 3803
-    - path: data/proc/entities.parquet
-      hash: md5
-      md5: 8cde13809a05fd7771e10c47dde76dce
-      size: 418517
-    - path: data/proc/groups.parquet
-      hash: md5
-      md5: cfb3d0492afe519948bf3e1b5f19cfa3
-      size: 203812
-    - path: data/proc/industries.parquet
-      hash: md5
-      md5: c31b3628544fbb5a7f8c04bb5984800a
-      size: 2495
-    - path: data/proc/prices.parquet
-      hash: md5
-      md5: d8b25b6e4aa00d37e9dc76466ed75716
-      size: 5047
-    - path: data/proc/ranking.parquet
-      hash: md5
-      md5: 09983c9752d93899a1b041a225214c99
-      size: 131295
-    - path: data/proc/records.parquet
-      hash: md5
-      md5: 0cdb16e17bc5f09e22a24a65c4a4d8d6
-      size: 768163
-    - path: data/proc/relations.parquet
-      hash: md5
-      md5: b4bef355fe43994d7ce29edbae37f4b1
-      size: 568469
-    - path: data/proc/shares.parquet
-      hash: md5
-      md5: e7f57a3025a870f4f7120a48adffd3f7
-      size: 102884
-    - path: data/proc/yearly.parquet
-      hash: md5
-      md5: 443bc2feb227280772b699d1b0995057
-      size: 474029
-    - path: kingpol/dataset/proc.py
-      hash: md5
-      md5: 98feae6010b482b73476b08aca198ee1
-      size: 2847
-    - path: kingpol/excel.py
-      hash: md5
-      md5: 7fdcbc780559f1444d2d5e15e3e5f85f
-      size: 795
-    - path: scripts/make_excel.py
-      hash: md5
-      md5: f1c0694ae673159b2b1449a2a0258f2f
-      size: 1171
-    outs:
-    - path: data/proc/kingpol.xlsx
-      hash: md5
-      md5: 61cbb6292af2d9dce22c25be1ca30cc7
-      size: 9684207
-  tables:
-    cmd: python scripts/make_tables.py
-    deps:
-    - path: data/proc/entities.parquet
-      hash: md5
-      md5: 9862b4be9c4ad67923221bd532fe8a67
-      size: 420197
-    - path: data/proc/ranking.parquet
-      hash: md5
-      md5: 2892998ffcf386b9c5972ff2afb0a185
-      size: 184367
-    - path: data/proc/yearly.parquet
-      hash: md5
-      md5: 8f9e1d1d56686aee81e7bc77f7c8e621
-      size: 474357
-    - path: kingpol/dataset/proc.py
-      hash: md5
-      md5: 98feae6010b482b73476b08aca198ee1
-      size: 2847
-    - path: kingpol/excel.py
-      hash: md5
-      md5: 7fdcbc780559f1444d2d5e15e3e5f85f
-      size: 795
-    - path: kingpol/stats.py
-      hash: md5
-      md5: f5c4c2edf6d5387a43a0211148c2c400
-      size: 748
-    - path: scripts/make_tables.py
-      hash: md5
-      md5: 1ccbacfa05487b0d166a26d35cd0cee0
-      size: 8526
-    params:
-      params.yaml:
-        tables:
-          employment_and_value:
-            governorate: Governorates (1911)
-            industry: Industries (1911)
-            subsector: Sectors (1911)
-    outs:
-    - path: data/proc/tables.xlsx
-      hash: md5
-      md5: 2629604427eccacaff46135239280913
-      size: 26818
-  codebook:
-    cmd: python scripts/make_codebook.py && make codebook
-    deps:
-    - path: data/proc/kingpol.xlsx
-      hash: md5
-      md5: 990007dd316bb4a056668b20bdaa6d71
-      size: 13488992
-    - path: kingpol/dataset/fields
-      hash: md5
-      md5: be61f26b95c2c15bdc1fae3edf2746fc.dir
-      size: 23739
-      nfiles: 14
-    - path: kingpol/dataset/models
-      hash: md5
-      md5: 93eff609cd5169dd6aa1207143c3eab9.dir
-      size: 94006
-      nfiles: 26
-    - path: kingpol/strings.py
-      hash: md5
-      md5: 587f073b4591af0c60c882c101b90f75
-      size: 455
-    - path: scripts/make_codebook.py
-      hash: md5
-      md5: b14edf444f956cea3c5e3bb6d7d8dc50
-      size: 1786
-    outs:
-    - path: CODEBOOK.md
-      hash: md5
-      md5: c954b659ded682a3986ec663692e3de5
-      size: 22586
-    - path: CODEBOOK.pdf
-      hash: md5
-      md5: c2ed9de55c19a8cded17546885bc49ce
-      size: 139199
-  readme:
-    cmd: python scripts/make_readme.py && make readme
-    deps:
-    - path: data/proc/kingpol.xlsx
-      hash: md5
-      md5: 990007dd316bb4a056668b20bdaa6d71
-      size: 13488992
-    - path: kingpol/dataset/models
-      hash: md5
-      md5: 93eff609cd5169dd6aa1207143c3eab9.dir
-      size: 94006
-      nfiles: 26
-    - path: kingpol/strings.py
-      hash: md5
-      md5: 587f073b4591af0c60c882c101b90f75
-      size: 455
-    - path: scripts/make_readme.py
-      hash: md5
-      md5: 0ae40778024b528b931692337ffcb79f
-      size: 3618
-    - path: templates/README.md
-      hash: md5
-      md5: 9243975e76a668d200566f2243b82134
-      size: 18030
-    outs:
-    - path: README.md
-      hash: md5
-      md5: cbb96e779a8ef25b967e61d614ebdc43
-      size: 18009
-    - path: README.pdf
-      hash: md5
-      md5: b6a1633d18f7e47a07593319980e9957
-      size: 264418
   kingpol:
     cmd: python scripts/make_kingpol.py
     deps:
@@ -741,7 +567,117 @@ stages:
       md5: f1c0694ae673159b2b1449a2a0258f2f
       size: 1171
     outs:
-    - path: data/proc/kingpol.xlsx
+    - path: data/proc/kingpol.ods
       hash: md5
-      md5: 990007dd316bb4a056668b20bdaa6d71
+      md5: 548886d2fa303b3b79eec82512a7dd12
       size: 13488992
+  tables:
+    cmd: python scripts/make_tables.py
+    deps:
+    - path: data/proc/entities.parquet
+      hash: md5
+      md5: 9862b4be9c4ad67923221bd532fe8a67
+      size: 420197
+    - path: data/proc/ranking.parquet
+      hash: md5
+      md5: 2892998ffcf386b9c5972ff2afb0a185
+      size: 184367
+    - path: data/proc/yearly.parquet
+      hash: md5
+      md5: 8f9e1d1d56686aee81e7bc77f7c8e621
+      size: 474357
+    - path: kingpol/dataset/proc.py
+      hash: md5
+      md5: 98feae6010b482b73476b08aca198ee1
+      size: 2847
+    - path: kingpol/excel.py
+      hash: md5
+      md5: 7fdcbc780559f1444d2d5e15e3e5f85f
+      size: 795
+    - path: kingpol/stats.py
+      hash: md5
+      md5: f5c4c2edf6d5387a43a0211148c2c400
+      size: 748
+    - path: scripts/make_tables.py
+      hash: md5
+      md5: 1ccbacfa05487b0d166a26d35cd0cee0
+      size: 8526
+    params:
+      params.yaml:
+        tables:
+          employment_and_value:
+            governorate: Governorates (1911)
+            industry: Industries (1911)
+            subsector: Sectors (1911)
+    outs:
+    - path: data/proc/tables.ods
+      hash: md5
+      md5: 88a3bd063a98753f339d75fa0c8e6a9c
+      size: 26817
+  codebook:
+    cmd: python scripts/make_codebook.py && make codebook
+    deps:
+    - path: data/proc/kingpol.ods
+      hash: md5
+      md5: 548886d2fa303b3b79eec82512a7dd12
+      size: 13488992
+    - path: kingpol/dataset/fields
+      hash: md5
+      md5: be61f26b95c2c15bdc1fae3edf2746fc.dir
+      size: 23739
+      nfiles: 14
+    - path: kingpol/dataset/models
+      hash: md5
+      md5: 93eff609cd5169dd6aa1207143c3eab9.dir
+      size: 94006
+      nfiles: 26
+    - path: kingpol/strings.py
+      hash: md5
+      md5: 587f073b4591af0c60c882c101b90f75
+      size: 455
+    - path: scripts/make_codebook.py
+      hash: md5
+      md5: b14edf444f956cea3c5e3bb6d7d8dc50
+      size: 1786
+    outs:
+    - path: CODEBOOK.md
+      hash: md5
+      md5: c954b659ded682a3986ec663692e3de5
+      size: 22586
+    - path: CODEBOOK.pdf
+      hash: md5
+      md5: 9dce7e2d3c99b780280c74c29aacb5b3
+      size: 139199
+  readme:
+    cmd: python scripts/make_readme.py && make readme
+    deps:
+    - path: data/proc/kingpol.ods
+      hash: md5
+      md5: 548886d2fa303b3b79eec82512a7dd12
+      size: 13488992
+    - path: kingpol/dataset/models
+      hash: md5
+      md5: 93eff609cd5169dd6aa1207143c3eab9.dir
+      size: 94006
+      nfiles: 26
+    - path: kingpol/strings.py
+      hash: md5
+      md5: 587f073b4591af0c60c882c101b90f75
+      size: 455
+    - path: scripts/make_readme.py
+      hash: md5
+      md5: 0ae40778024b528b931692337ffcb79f
+      size: 3618
+    - path: templates/README.md
+      hash: md5
+      md5: 9243975e76a668d200566f2243b82134
+      size: 18030
+    outs:
+    - path: README.md
+      hash: md5
+      md5: c794cd8a42b29400df400a129db27edb
+      size: 18005
+    - path: README.pdf
+      hash: md5
+      md5: 6d4dacdab43531dae397c7c579a8e5e6
+      size: 264425

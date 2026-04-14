@@ -337,13 +337,13 @@ The checksums are read from the [dvc.lock](dvc.lock) file.
 
 * Auxiliary data files
 
-	* `data/aux/prices.xlsx`: `ed72692acae68ab4a715d737b317df8f`
+	* `data/aux/prices.ods`: `0d137393350e0866c1cf1bb50b86c3f7`
 
-	* `data/aux/corrections.xlsx`: `5bdadd7e8b96447a5e83e2f4e6f97c4d`
+	* `data/aux/corrections.ods`: `25bbc6643f83f518ca9b2dbb0a6310aa`
 
-	* `data/aux/properties.xlsx`: `99d75b68d61e71ee359450418018b894`
+	* `data/aux/properties.ods`: `e28d4046a6bca84b47bc05239d871f52`
 
-	* `data/aux/merging.xlsx`: `701bd227a57366efdd26c0f750700156`
+	* `data/aux/merging.ods`: `9661b5b7fd4fe98f8d86ad32b2d24bf8`
 
 ### Outlier detection
 
